@@ -1,6 +1,6 @@
 
-var bullet,wall,thickness;
-var speed,weight;
+var bullet,bullet1,bullet2,wall,wall1,wall2;
+var speed,weight,thickness;
 
 
 function setup() {
@@ -49,37 +49,50 @@ function setup() {
 function draw() {
   background(255,255,255); 
   
- if(hascollided(bullet,wall)){
-  bullet.velocityX=0;
+ if(hascollided(bullet,wall,bullet.velocityX)){
+   bullet.velocityX=0;
   var damage=0.5 *weight *speed*speed/(thickness*thickness*thickness);
-
+  bullet.velocityX = 0;
+  
   if(damage>10){
+    bullet.velocityX = 0;
     wall.shapeColor=color(255,0,0);
   }
+
 if(damage<10){
+  bullet.velocityX = 0;
   wall.shapeColor=color(0,0250,0);
 }
  }
 
- if(hascollided(bullet2,wall2)){
+ if(hascollided(bullet2,wall2,bullet2.velocityX)){
   bullet2.velocityX=0;
   var damage=0.5 *weight *speed*speed/(thickness*thickness*thickness);
+  bullet2.velocityX = 0;
 
   if(damage>10){
+    bullet2.velocityX = 0;
     wall2.shapeColor=color(255,0,0);
   }
+
 if(damage<10){
+  bullet2.velocityX = 0;
   wall2.shapeColor=color(0,0250,0);
 }
- }        
- if(hascollided(bullet1,wall1)){
-  bullet1.velocityX=0;
+
+ }
+
+ if(hascollided(bullet1,wall1,bullet1.velocityX)){
+  bullet1.velocityX = 0;
   var damage=0.5 *weight *speed*speed/(thickness*thickness*thickness);
+  bullet1.velocityX = 0;
 
   if(damage>10){
+    bullet1.velocityX = 0;
     wall1.shapeColor=color(255,0,0);
   }
 if(damage<10){
+  bullet1.velocityX = 0;
   wall1.shapeColor=color(0,0250,0);
 }
  }
@@ -87,15 +100,39 @@ if(damage<10){
 
 }
 
-function hascollided(lbullet,lwall)
+function hascollided(lbullet,lwall,velocity)
 {
   bulletRightEdge=lbullet.x+lbullet.width;
   wallLeftEdge=lwall.x;
-  if(bulletRightEdge>=wallLeftEdge)
+  if(bulletRightEdge + velocity/1.7>=wallLeftEdge)
+  {
+    return true
+  }
+  return false
+}
+
+function Hascollided(lbullet1,lwall1)
+{
+  bullet1RightEdge=lbullet1.x+lbullet1.width;
+  wall1LeftEdge=lwall1.x;
+  if(bullet1RightEdge>=wall1LeftEdge)
   {
     return true
   }
   return false
 
+
+}
+
+function hasCollided(lbullet2,lwall2)
+{
+  bullet2RightEdge=lbullet2.x+lbullet2.width;
+  wall2LeftEdge=lwall2.x;
+  if(bullet2RightEdge>=wall2LeftEdge)
+  {
+    return true
+  }
+  
+  return false
 
 }
